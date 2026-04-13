@@ -1,0 +1,16 @@
+# Java / Maven
+target/
+*.class
+*.jar
+*.war
+*.ear
+
+# IntelliJ
+.idea/
+*.iml
+out/
+gen/
+
+# Logs e OS
+*.log
+.DS_Store

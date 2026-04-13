@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="jakarta.faces.core">
+
+<h:head>
+    <title>CRUD de Usuários - Estudo Java Fullstack</title>
+    <style>
+        .footer-tech {
+            margin-top: 50px;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #555;
+        }
+        .footer-tech a {
+            color: #ff6600;
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <h:form id="formUsuario">
+        <p:growl id="messages" showDetail="true" life="3000" />
+
+        <p:panel header="Gerenciamento de Usuários" style="margin-bottom:20px">
+            <h:panelGrid columns="3" cellpadding="7">
+
+                <p:outputLabel for="nome" value="Nome:" />
+                <p:inputText id="nome" value="#{usuarioController.usuario.nome}" />
+                <p:message for="nome" display="text" />
+
+                <p:outputLabel for="email" value="Email:" />
+                <p:inputText id="email" value="#{usuarioController.usuario.email}" />
+                <p:message for="email" display="text" />
+
+                <p:outputLabel for="cargo" value="Cargo:" />
+                <p:inputText id="cargo" value="#{usuarioController.usuario.cargo}" />
+                <p:message for="cargo" display="text" />
+
+                <h:panelGroup />
+                <p:commandButton value="Salvar Registro"
+                                 action="#{usuarioController.salvar}"
+                                 update="formUsuario"
+                                 icon="pi pi-save"
+                                 styleClass="ui-button-primary" />
+            </h:panelGrid>
+        </p:panel>
+
+        <p:dataTable id="tabelaUsuarios" value="#{usuarioController.usuarios}" var="user"
+                     emptyMessage="Nenhum registro encontrado na base de dados H2.">
+
+            <f:facet name="header">Repositório de Usuários</f:facet>
+
+            <p:column headerText="ID" width="60" style="text-align: center">
+                <h:outputText value="#{user.id}" />
+            </p:column>
+
+            <p:column headerText="Nome">
+                <h:outputText value="#{user.nome}" />
+            </p:column>
+
+            <p:column headerText="E-mail">
+                <h:outputText value="#{user.email}" />
+            </p:column>
+
+            <p:column headerText="Cargo">
+                <h:outputText value="#{user.cargo}" />
+            </p:column>
+
+            <p:column headerText="Ações" width="120" style="text-align: center">
+                <p:commandButton icon="pi pi-pencil"
+                                 action="#{usuarioController.prepararEdicao(user)}"
+                                 update="formUsuario"
+                                 styleClass="ui-button-warning ui-button-flat"
+                                 process="@this" />
+
+                <p:commandButton icon="pi pi-trash"
+                                 action="#{usuarioController.excluir(user.id)}"
+                                 update="formUsuario"
+                                 styleClass="ui-button-danger ui-button-flat"
+                                 process="@this">
+                    <p:confirm header="Confirmação de Exclusão"
+                               message="Tem certeza que deseja remover este registro?"
+                               icon="pi pi-info-circle" />
+                </p:commandButton>
+            </p:column>
+        </p:dataTable>
+
+        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+            <p:commandButton value="Cancelar" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+            <p:commandButton value="Confirmar" type="button" styleClass="ui-confirmdialog-yes ui-button-danger" />
+        </p:confirmDialog>
+
+        <div class="footer-tech">
+            <p>Full Stack Project desenvolvido por <strong>Bruno Ramos</strong></p>
+            <p>
+                <h:outputLink value="https://brunoramos.tec.br/" target="_blank">
+                    brunoramos.tec.br
+                </h:outputLink>
+            </p>
+        </div>
+    </h:form>
+
+    <f:metadata>
+        <f:viewAction action="#{usuarioController.init}" />
+    </f:metadata>
+</h:body>
+</html>
