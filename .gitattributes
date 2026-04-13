@@ -1,0 +1,10 @@
+
+*.xhtml linguist-detectable=false
+*.xhtml linguist-documentation=false
+
+
+*.css linguist-detectable=false
+*.js linguist-detectable=false
+
+
+*.java linguist-detectable=true
