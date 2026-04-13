@@ -34,7 +34,7 @@ O projeto segue o padrão de convenção do Maven:
 ### Passos
 1.  Clone o repositório:
     ```bash
-    git clone [https://github.com/seu-usuario/crud-java-fullstack.git](https://github.com/seu-usuario/crud-java-fullstack.git)
+    git clone https://github.com/thinkbruno/crud-java-fullstack.git
     ```
 2.  Navegue até a pasta:
     ```bash
